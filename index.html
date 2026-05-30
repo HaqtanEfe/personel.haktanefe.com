@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HaqtanEfe — Personal</title>
+<meta name="description" content="The non-business version of Haq — games, interests, and how to find me online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-card: #141414;
+    --bg-card-hover: #181818;
+    --border: #1f1f1f;
+    --border-strong: #2a2a2a;
+    --text: #ededed;
+    --muted: #8a8a8a;
+    --muted-strong: #b5b5b5;
+    /* multi-accent palette — used as section tints */
+    --accent:        #fb7185;  /* rose (main, matches Home/Business) */
+    --c-teal:        #5eead4;
+    --c-yellow:      #fde047;
+    --c-violet:      #c4b5fd;
+    --c-peach:       #fdba74;
+    --c-sky:         #93c5fd;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100vh; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    line-height: 1.55;
+    padding: 48px 32px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  .prose { max-width: 680px; }
+
+  /* ─── Nav ─────────────────────────────────────────── */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav .logo {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: 18px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    user-select: none;
+  }
+  .nav .logo-img { height: 32px; width: auto; display: block; }
+  .nav .logo-text .accent { color: var(--accent); }
+  .nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .nav a { color: inherit; text-decoration: none; transition: color .2s; }
+  .nav a:hover { color: var(--text); }
+  .nav .nav-active { color: var(--text); }
+
+  /* ─── Discord live profile card (hero) ──────────── */
+  .discord-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    min-width: 300px;
+    max-width: 340px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: border-color .2s, transform .2s;
+  }
+  .discord-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .dc-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .dc-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: block;
+    background: #1f1f1f;
+    object-fit: cover;
+  }
+  .dc-status-ring {
+    position: absolute;
+    bottom: -2px; right: -2px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 3px solid var(--bg-card);
+    background: #4b5563;
+    transition: background .3s;
+  }
+  .dc-status-ring.online { background: #22c55e; }
+  .dc-status-ring.idle   { background: #f59e0b; }
+  .dc-status-ring.dnd    { background: #ef4444; }
+  .dc-info { min-width: 0; flex: 1; }
+  .dc-name { font-size: 16px; font-weight: 600; color: var(--text); line-height: 1.2; }
+  .dc-handle { font-size: 11px; color: var(--muted); font-family: var(--mono); margin-top: 2px; }
+  .dc-custom {
+    margin-top: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .dc-custom .dc-emoji { font-size: 14px; line-height: 1.45; flex-shrink: 0; }
+  .dc-custom .dc-emoji img { width: 16px; height: 16px; vertical-align: -3px; }
+  .dc-state {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .dc-activity {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--muted-strong);
+    line-height: 1.35;
+  }
+  .dc-act-thumb {
+    width: 28px; height: 28px;
+    border-radius: 5px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.05);
+  }
+  .dc-act-thumb.is-emoji {
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    color: var(--accent);
+  }
+  .dc-act-info { min-width: 0; flex: 1; line-height: 1.3; }
+  .dc-act-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dc-act-line.primary { color: var(--text); font-weight: 500; }
+  .dc-empty { color: var(--muted); font-size: 12.5px; font-style: italic; margin-top: 12px; }
+
+  /* ─── Hero ────────────────────────────────────────── */
+  .hero {
+    padding: 120px 0 64px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-text { min-width: 0; }
+  .wave-eyebrow {
+    color: var(--c-yellow);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .wave {
+    display: inline-block;
+    animation: wave 2.4s ease-in-out infinite;
+    transform-origin: 70% 70%;
+  }
+  @keyframes wave {
+    0%, 60%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+  }
+  h1 {
+    font-size: clamp(44px, 7vw, 80px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  h1 .name {
+    background: linear-gradient(90deg, var(--accent), var(--c-peach), var(--c-yellow));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  h1 .dot {
+    color: var(--accent);
+  }
+  .hero .lead {
+    font-size: 19px;
+    color: var(--muted-strong);
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .hero .lead em { font-style: italic; color: var(--text); }
+
+  /* ─── Section helpers ─────────────────────────────── */
+  section.block { margin-bottom: 96px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 32px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-head h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .section-head .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+  }
+  .tag.t-teal   { color: var(--c-teal);   border: 1px solid color-mix(in srgb, var(--c-teal)   30%, transparent); }
+  .tag.t-yellow { color: var(--c-yellow); border: 1px solid color-mix(in srgb, var(--c-yellow) 30%, transparent); }
+  .tag.t-violet { color: var(--c-violet); border: 1px solid color-mix(in srgb, var(--c-violet) 30%, transparent); }
+  .tag.t-peach  { color: var(--c-peach);  border: 1px solid color-mix(in srgb, var(--c-peach)  30%, transparent); }
+  .tag.t-sky    { color: var(--c-sky);    border: 1px solid color-mix(in srgb, var(--c-sky)    30%, transparent); }
+
+  /* ─── About / prose ───────────────────────────────── */
+  .prose p {
+    color: var(--muted-strong);
+    margin-bottom: 14px;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--text); font-weight: 500; }
+  .prose .hl { color: var(--c-yellow); }
+  .prose .hl-teal { color: var(--c-teal); }
+
+  /* About me with sidebar info card */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 40px;
+    align-items: start;
+  }
+  .info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+  }
+  .info-card .info-head {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--c-yellow);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card .info-head::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--c-yellow);
+  }
+  .info-list { display: flex; flex-direction: column; }
+  .info-list .row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+    border-top: 1px dashed var(--border);
+  }
+  .info-list .row:first-child { border-top: none; padding-top: 0; }
+  .info-list .row:last-child  { padding-bottom: 0; }
+  .info-list .key {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .info-list .value {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .info-list .value .placeholder { color: var(--muted); font-style: italic; }
+  .info-list .value ul {
+    list-style: none;
+    margin-top: 2px;
+  }
+  .info-list .value ul li {
+    padding-left: 12px;
+    position: relative;
+    color: var(--muted-strong);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .info-list .value ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* ─── Currently (bento grid) ──────────────────────
+     6-col grid:
+        ┌──────────────────────┬─────────┐
+        │      PLAYING         │ LISTEN  │
+        │      (4×2 — big)     │ (2×2)   │
+        ├──────────┬───────────┼─────────┤
+        │  BUILD   │   LEARN   │  ARG    │
+        │  (2×1)   │   (2×1)   │  (2×1)  │
+        └──────────┴───────────┴─────────┘ */
+  .currently-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-flow: dense;
+    gap: 18px;
+  }
+  .current-tile {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 30px;
+    transition: transform .2s, border-color .2s;
+    display: flex;
+    flex-direction: column;
+    grid-column: span 2;  /* default size */
+  }
+  .current-tile:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+  .tile-playing { grid-column: span 4; grid-row: span 2; }
+  .tile-listen  { grid-column: span 2; grid-row: span 2; }
+  .current-tile .verb {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 22px;
+  }
+  .verb.v-rose   { color: var(--accent); }
+  .verb.v-teal   { color: var(--c-teal); }
+  .verb.v-yellow { color: var(--c-yellow); }
+  .verb.v-violet { color: var(--c-violet); }
+  .verb.v-peach  { color: var(--c-peach); }
+  .verb.v-sky    { color: var(--c-sky); }
+  .tile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    list-style: none;
+  }
+  .tile-list li {
+    font-size: 16px;
+    color: var(--muted-strong);
+    line-height: 1.4;
+    display: grid;
+    grid-template-columns: 26px 1fr auto;
+    column-gap: 12px;
+    align-items: baseline;
+  }
+  .tile-list li .icon {
+    font-size: 17px;
+    text-align: center;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tile-list li .icon svg,
+  .tile-list li .icon img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    object-fit: contain;
+    transition: transform .2s;
+  }
+  .icon-clickable { cursor: pointer; }
+  .icon-clickable:active svg { transform: scale(0.9); }
+
+  /* Tee blinking eyes (DDraceNetwork) */
+  .tee-eye {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: tee-blink 4.5s ease-in-out infinite;
+  }
+  .tee-eye-2 { animation-delay: 0s; }
+  @keyframes tee-blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    93%, 97%      { transform: scaleY(0.05); }
+  }
+
+  /* Dirt particle (Minecraft block-break easter egg) */
+  .dirt-particle {
+    position: fixed;
+    width: 7px;
+    height: 7px;
+    pointer-events: none;
+    z-index: 250;
+    border-radius: 1px;
+    will-change: transform, opacity;
+  }
+  .tile-list li .name { color: var(--text); font-weight: 500; }
+  .tile-list li .note { color: var(--muted); font-size: 13px; font-style: italic; }
+  .tile-list li.joke { color: var(--muted); font-style: italic; }
+  .tile-list li.joke .name { color: var(--muted); font-weight: 400; }
+  .tile-list.no-icons li { grid-template-columns: 1fr auto; }
+  .tile-list li:hover .icon { transform: scale(1.15) rotate(-4deg); transition: transform .2s; }
+  .tile-sub {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px dashed var(--border);
+  }
+  .tile-sub .sub-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .mini-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .mini-chip {
+    font-size: 13px;
+    color: var(--muted-strong);
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+  }
+
+  /* ─── Likes (chips) ───────────────────────────────── */
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+  .chip {
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    font-size: 15px;
+    color: var(--muted-strong);
+    transition: transform .15s, border-color .2s, color .2s;
+  }
+  .chip:hover {
+    transform: translateY(-1px) rotate(-1deg);
+    color: var(--text);
+  }
+  .chip.c-rose:hover   { border-color: var(--accent);   color: var(--accent); }
+  .chip.c-teal:hover   { border-color: var(--c-teal);   color: var(--c-teal); }
+  .chip.c-yellow:hover { border-color: var(--c-yellow); color: var(--c-yellow); }
+  .chip.c-violet:hover { border-color: var(--c-violet); color: var(--c-violet); }
+  .chip.c-peach:hover  { border-color: var(--c-peach);  color: var(--c-peach); }
+  .chip.c-sky:hover    { border-color: var(--c-sky);    color: var(--c-sky); }
+
+  /* ─── Find me ─────────────────────────────────────── */
+  .socials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 26px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .2s, background .2s, transform .2s;
+  }
+  .social:hover { transform: translateY(-2px); }
+  .social .icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    background: rgba(255,255,255,0.05);
+    flex-shrink: 0;
+  }
+  .social .platform { font-weight: 500; font-size: 15px; line-height: 1.2; margin-bottom: 2px; }
+  .social .handle   { color: var(--muted); font-size: 12px; font-family: var(--mono); }
+  .social.s-rose:hover   { border-color: var(--accent); }
+  .social.s-rose:hover   .icon { background: color-mix(in srgb, var(--accent)   18%, transparent); color: var(--accent); }
+  .social.s-violet:hover { border-color: var(--c-violet); }
+  .social.s-violet:hover .icon { background: color-mix(in srgb, var(--c-violet) 18%, transparent); color: var(--c-violet); }
+  .social.s-peach:hover  { border-color: var(--c-peach); }
+  .social.s-peach:hover  .icon { background: color-mix(in srgb, var(--c-peach)  18%, transparent); color: var(--c-peach); }
+  .social.s-sky:hover    { border-color: var(--c-sky); }
+  .social.s-sky:hover    .icon { background: color-mix(in srgb, var(--c-sky)    18%, transparent); color: var(--c-sky); }
+  .social.s-teal:hover   { border-color: var(--c-teal); }
+  .social.s-teal:hover   .icon { background: color-mix(in srgb, var(--c-teal)   18%, transparent); color: var(--c-teal); }
+
+  /* ─── Footer ─────────────────────────────────────── */
+  footer {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer a { color: var(--muted); text-decoration: none; margin-left: 20px; transition: color .2s; }
+  footer a:hover { color: var(--text); }
+  .footer-secret {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 24px;
+    opacity: 0.4;
+    font-family: var(--mono);
+    text-align: center;
+  }
+  .footer-secret kbd {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 10px;
+  }
+
+  /* ─── Toast ──────────────────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--bg-card);
+    color: var(--text);
+    border: 1px solid var(--accent);
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity .2s ease, transform .25s ease;
+    pointer-events: none;
+  }
+  .toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ─── Confetti (Konami code easter egg) ──────────── */
+  .confetti-piece {
+    position: fixed;
+    width: 8px; height: 14px;
+    top: -20px;
+    z-index: 99;
+    pointer-events: none;
+    border-radius: 1px;
+    animation: confetti-fall linear forwards;
+  }
+  @keyframes confetti-fall {
+    to { transform: translateY(110vh) rotate(720deg); }
+  }
+
+  /* ─── Command palette overlay (press "/") ────────── */
+  .cmd-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: grid;
+    place-items: center;
+    z-index: 200;
+    padding: 80px 24px;
+    opacity: 0;
+    transition: opacity .15s;
+    pointer-events: none;
+  }
+  .cmd-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .cmd-box {
+    width: min(520px, 100%);
+    background: #0e0e0e;
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(251,113,133,0.15);
+  }
+  .cmd-prompt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .cmd-prompt .arrow {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-weight: 500;
+  }
+  .cmd-prompt input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 15px;
+  }
+  .cmd-list { max-height: 320px; overflow-y: auto; }
+  .cmd-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 18px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--muted-strong);
+    border-bottom: 1px solid var(--border);
+  }
+  .cmd-item:last-child { border-bottom: none; }
+  .cmd-item:hover, .cmd-item.is-active {
+    background: rgba(251,113,133,0.08);
+    color: var(--text);
+  }
+  .cmd-item .kbd {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .cmd-item .desc { color: var(--muted); font-size: 12px; }
+
+  /* ─── Party mode ─────────────────────────────────── */
+  body.party-mode {
+    animation: party 2s linear infinite;
+  }
+  @keyframes party {
+    0%   { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+
+  /* ─── Responsive ─────────────────────────────────── */
+  @media (max-width: 900px) {
+    /* collapse bento to 2 columns, but keep PLAYING wide */
+    .currently-grid { grid-template-columns: repeat(2, 1fr); }
+    .tile-playing { grid-column: span 2; grid-row: auto; }
+    .tile-listen  { grid-column: span 2; grid-row: auto; }
+    .current-tile { grid-column: span 1; }
+    .hero { grid-template-columns: 1fr; gap: 32px; }
+    .discord-card { max-width: 100%; }
+  }
+  @media (max-width: 640px) {
+    body { padding: 28px 20px; }
+    .hero { padding: 56px 0 32px; }
+    .nav ul { gap: 18px; }
+    .currently-grid { grid-template-columns: 1fr; }
+    .tile-playing, .tile-listen, .current-tile { grid-column: span 1; }
+    .about-grid { grid-template-columns: 1fr; gap: 24px; }
+    footer { flex-direction: column; gap: 16px; }
+    footer .links a:first-child { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ─── Nav ─── -->
+    <nav class="nav">
+      <a class="logo" href="/" aria-label="HaqtanEfe home" id="logo-btn">
+        <img class="logo-img" src="logo.png" alt="HaqtanEfe" onerror="this.remove(); document.querySelector('.logo-text').hidden=false;">
+        <span class="logo-text" hidden>HaqtanEfe<span class="accent">.</span></span>
+      </a>
+      <ul>
+        <li><a href="https://haktanefe.com">Home</a></li>
+        <li><a class="nav-active" href="/">Personal</a></li>
+        <li><a href="https://business.haktanefe.com">Business</a></li>
+      </ul>
+    </nav>
+
+    <!-- ─── Hero ─── -->
+    <section class="hero">
+      <div class="hero-text">
+        <div class="wave-eyebrow"><span class="wave">👋</span> friends-only zone</div>
+        <h1>Hey, I'm <span class="name">Haq</span><span class="dot">.</span></h1>
+        <p class="lead">
+          Or Haqtan. Or HaqtanEfe. Same person. <em>This is the casual side</em> —
+          for friends, for people who want to know who's behind the projects,
+          and for anyone who got here by accident.
+        </p>
+      </div>
+      <a class="discord-card js-discord" href="#" data-username="HaqtanEfe" title="click to copy my Discord username">
+        <div class="dc-avatar-wrap">
+          <img class="dc-avatar" id="dc-avatar" src="" alt="" onerror="this.style.opacity=0.2;">
+          <span class="dc-status-ring" id="dc-status-ring"></span>
+        </div>
+        <div class="dc-info">
+          <div class="dc-name"   id="dc-name">loading…</div>
+          <div class="dc-handle" id="dc-handle">@HaqtanEfe</div>
+          <div id="dc-presence" class="dc-empty">connecting to Discord…</div>
+        </div>
+      </a>
+    </section>
+
+    <!-- ─── About ─── -->
+    <section class="block">
+      <div class="section-head">
+        <h2>About me</h2>
+        <span class="tag t-yellow">the long version</span>
+      </div>
+      <div class="about-grid">
+        <div class="prose">
+          <p>
+            Name's <strong>Haktan</strong>, but you'll see me as <strong>Haq</strong> or
+            <strong>HaqtanEfe</strong> in most places. <strong>17</strong>, from
+            <strong>Turkey</strong>, <span class="hl">half-glued to a keyboard</span> since I was 9.
+          </p>
+          <p>
+            I started by breaking computers I wasn't supposed to be touching.
+            Then I figured out you could fix them, then <em>make</em> them do things, and that was that.
+          </p>
+          <p>
+            I script Roblox for work, but most of my time goes to <span class="hl-teal">side quests</span> &mdash;
+            Linux distros, self-hosted servers that may or may not survive the week, Java modding,
+            flight physics for a plane game, weird Python scripts that solved problems nobody had.
+          </p>
+          <p>
+            Night owl, introvert with social battery, try to learn one new thing a week.
+            I love the moment something <em>just works</em> after I've been fighting it for hours.
+          </p>
+        </div>
+        <aside class="info-card">
+          <div class="info-head">Quick info</div>
+          <div class="info-list">
+            <div class="row">
+              <div class="key">Pronouns</div>
+              <div class="value">He / Him</div>
+            </div>
+            <div class="row">
+              <div class="key">Timezone</div>
+              <div class="value">GMT+3 · Türkiye</div>
+            </div>
+            <div class="row">
+              <div class="key">Languages</div>
+              <div class="value">English · Türkçe</div>
+            </div>
+            <div class="row">
+              <div class="key">Birthday</div>
+              <div class="value">January 2</div>
+            </div>
+            <div class="row">
+              <div class="key">Sleep schedule</div>
+              <div class="value">what's that</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ─── Currently ─── -->
+    <section class="block">
+      <div class="section-head">
+        <h2>Currently</h2>
+        <span class="tag t-teal">vibes · 2026</span>
+      </div>
+      <div class="currently-grid">
+
+        <div class="current-tile tile-playing">
+          <div class="verb v-teal">▶ playing</div>
+          <ul class="tile-list">
+            <li>
+              <span class="icon icon-clickable js-mc-click" title="try clicking me">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="0" y="0"  width="24" height="7"  fill="#7BAA42"/>
+                  <rect x="0" y="7"  width="24" height="17" fill="#8B6440"/>
+                  <rect x="2"  y="2"  width="2" height="2" fill="#6B9A38"/>
+                  <rect x="8"  y="4"  width="2" height="2" fill="#8BBA52"/>
+                  <rect x="16" y="2"  width="2" height="2" fill="#6B9A38"/>
+                  <rect x="20" y="5"  width="2" height="2" fill="#8BBA52"/>
+                  <rect x="4"  y="11" width="2" height="2" fill="#7A553C"/>
+                  <rect x="12" y="10" width="2" height="2" fill="#9C7448"/>
+                  <rect x="18" y="14" width="2" height="2" fill="#7A553C"/>
+                  <rect x="6"  y="18" width="2" height="2" fill="#7A553C"/>
+                  <rect x="16" y="20" width="2" height="2" fill="#9C7448"/>
+                </svg>
+              </span>
+              <span class="name">Minecraft</span> <span class="note">creativity</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" fill="#fbbf24"/>
+                  <path d="M9 16 Q12 17.5 15 16" stroke="#7c2d12" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+                  <ellipse cx="9"  cy="10.2" rx="2"   ry="2.4" fill="white"/>
+                  <ellipse cx="15" cy="10.2" rx="2"   ry="2.4" fill="white"/>
+                  <ellipse class="tee-eye"   cx="9"  cy="10.8" rx="1" ry="1.4" fill="#0a0a0a"/>
+                  <ellipse class="tee-eye tee-eye-2" cx="15" cy="10.8" rx="1" ry="1.4" fill="#0a0a0a"/>
+                </svg>
+              </span>
+              <span class="name">DDraceNetwork</span> <span class="note">chaos</span>
+            </li>
+            <li>
+              <span class="icon">
+                <!-- drop niko.png into Personel/ folder. If missing, the icon hides itself. -->
+                <img src="niko.png" alt="Niko" onerror="this.parentElement.innerHTML='';">
+              </span>
+              <span class="name">OneShot</span> <span class="note">story &amp; overall</span>
+            </li>
+            <li><span class="icon"></span><span class="name">Roblox</span> <span class="note">variety</span></li>
+            <li><span class="icon"></span><span class="name">CS2</span> <span class="note">favorite shooter</span></li>
+            <li class="joke"><span class="icon"></span><span class="name">Among Us</span> <span class="note">— nah, sus</span></li>
+          </ul>
+          <div class="tile-sub">
+            <div class="sub-label">└ inside roblox</div>
+            <div class="mini-chips">
+              <span class="mini-chip">🔬 SCP: Site Roleplay</span>
+              <span class="mini-chip">🏃 Parkour Reborn</span>
+              <span class="mini-chip">🕳 Fatal Floors</span>
+              <span class="mini-chip">✈️ Wings of Glory</span>
+              <span class="mini-chip">♾ Apeirophobia</span>
+              <span class="mini-chip">🛣 A Long Road</span>
+              <span class="mini-chip">💧 Pressure</span>
+              <span class="mini-chip">🧟 Project Lazarus</span>
+              <span class="mini-chip">🦇 Bite by Night</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="current-tile tile-listen">
+          <div class="verb v-violet">🎧 listening</div>
+          <ul class="tile-list no-icons">
+            <li><span class="name">Oricade</span></li>
+            <li><span class="name">John Michael Howell</span></li>
+            <li><span class="name">YonKaGor</span></li>
+            <li><span class="name">Y3llow</span></li>
+            <li><span class="name">Michael Jackson</span></li>
+            <li><span class="name">Musiclide</span></li>
+            <li><span class="name">Marino</span></li>
+            <li><span class="name">CG5</span></li>
+            <li><span class="name">AJ Dispirito</span></li>
+            <li><span class="name">Vocaloids</span></li>
+          </ul>
+        </div>
+
+        <div class="current-tile tile-build">
+          <div class="verb v-rose">⚡ building</div>
+          <ul class="tile-list">
+            <li>
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#93c5fd" stroke-width="1.4" stroke-linejoin="round">
+                  <path d="M22 2 L2 11 L10 13 L12 22 L22 2 Z"/>
+                  <path d="M10 13 L18 5" stroke-dasharray="1.5,1.5" opacity="0.6"/>
+                </svg>
+              </span>
+              <span class="name">Simple Plane Game</span> <span class="note">Roblox</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="11" y="9" width="2" height="14" rx="0.6" fill="#a16207"/>
+                  <path d="M2 6 Q4 4 8 5 L18 9 Q20 10 19 12 L8 8 Q4 7 2 6 Z" fill="#9ca3af" stroke="#4b5563" stroke-width="0.4"/>
+                </svg>
+              </span>
+              <span class="name">Semi-hardcore SMP</span> <span class="note">&gt;:3</span>
+            </li>
+            <li>
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="2" y="3"  width="4" height="4" fill="#ef4444"/>
+                  <rect x="2" y="8"  width="4" height="4" fill="#f97316"/>
+                  <rect x="2" y="13" width="4" height="4" fill="#facc15"/>
+                  <rect x="2" y="18" width="4" height="4" fill="#22c55e"/>
+                  <rect x="8"  y="3"  width="14" height="4" fill="#1f2937"/>
+                  <rect x="8"  y="8"  width="14" height="4" fill="#1f2937"/>
+                  <rect x="8"  y="13" width="14" height="4" fill="#1f2937"/>
+                  <rect x="8"  y="18" width="14" height="4" fill="#1f2937"/>
+                </svg>
+              </span>
+              <span class="name">Comma PvP Tier List</span> <span class="note">MC PvP</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="current-tile tile-learn">
+          <div class="verb v-yellow">🛠 learning</div>
+          <ul class="tile-list">
+            <li>
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 9 L18 9 L17 19 Q16.5 21.5 14 21.5 L9 21.5 Q6.5 21.5 6 19 Z" fill="#7c2d12" stroke="#451a03" stroke-width="0.5"/>
+                  <path d="M18 11 Q22 11 22 15 Q22 18 18 18" fill="none" stroke="#7c2d12" stroke-width="1.5"/>
+                  <path d="M9 7 Q10 5 9 3"  fill="none" stroke="#9ca3af" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+                  <path d="M14 7 Q15 5 14 3" fill="none" stroke="#9ca3af" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+                </svg>
+              </span>
+              <span class="name">Java modding</span> <span class="note">MC</span>
+            </li>
+            <li><span class="icon">✈️</span><span class="name">Flight physics</span> <span class="note">Roblox</span></li>
+            <li><span class="icon">📐</span><span class="name">Physics &amp; math</span></li>
+            <li><span class="icon">🐧</span><span class="name">Linux distros</span></li>
+            <li>
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <ellipse cx="13" cy="15" rx="9" ry="5" fill="#e5e7eb"/>
+                  <circle cx="6" cy="10" r="3.2" fill="#e5e7eb"/>
+                  <path d="M3 10 L0 14 L4 12 Z" fill="#fbbf24"/>
+                  <circle cx="6" cy="9.4" r="0.6" fill="#0a0a0a"/>
+                  <path d="M15 13 Q19 10 22 13" fill="none" stroke="#9ca3af" stroke-width="0.8"/>
+                </svg>
+              </span>
+              <span class="name">Pelican / Wings</span>
+            </li>
+            <li><span class="icon">🎨</span><span class="name">Drawing</span></li>
+          </ul>
+        </div>
+
+        <div class="current-tile tile-arg">
+          <div class="verb v-peach">📺 ARG / video</div>
+          <ul class="tile-list no-icons">
+            <li><span class="name">A Regect ARG</span></li>
+            <li><span class="name">Wifies ARGs</span> <span class="note">all of 'em</span></li>
+            <li><span class="name">Unstable Universe</span> <span class="note">Wemmbu &amp; Parrot</span></li>
+            <li><span class="name">Lifesteal SMP</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── Likes ─── -->
+    <section class="block">
+      <div class="section-head">
+        <h2>Things I'm into</h2>
+        <span class="tag t-violet">low effort, high accuracy</span>
+      </div>
+      <div class="chips">
+        <span class="chip c-rose">🦊 Roblox &amp; Luau</span>
+        <span class="chip c-teal">🖥 Self-hosting</span>
+        <span class="chip c-yellow">🔐 Privacy</span>
+        <span class="chip c-violet">🌙 Night owl</span>
+        <span class="chip c-peach">📡 Servers that may or may not survive the week</span>
+        <span class="chip c-sky">⌨ Terminals (still)</span>
+        <span class="chip c-rose">🎮 Indie games</span>
+        <span class="chip c-teal">🎨 Cute drawings</span>
+        <span class="chip c-yellow">🐱 Cute animals</span>
+        <span class="chip c-violet">📷 Photography</span>
+        <span class="chip c-peach">✈️ Aeroplane physics</span>
+        <span class="chip c-sky">🚀 Space physics</span>
+        <span class="chip c-rose">🐠 Memory of a gold— wait what</span>
+        <span class="chip c-teal">🔋 Introvert with social battery</span>
+        <span class="chip c-yellow">🗺 Side quests</span>
+      </div>
+    </section>
+
+    <!-- ─── Find me ─── -->
+    <section class="block">
+      <div class="section-head">
+        <h2>Find me elsewhere</h2>
+        <span class="tag t-peach">not all of them are clean</span>
+      </div>
+      <div class="socials-grid">
+        <a class="social s-rose js-discord" href="#" data-username="HaqtanEfe">
+          <div class="icon">💬</div>
+          <div>
+            <div class="platform">Discord</div>
+            <div class="handle">@HaqtanEfe · click to copy</div>
+          </div>
+        </a>
+        <a class="social s-sky" href="https://x.com/haqtanefe" target="_blank" rel="noopener">
+          <div class="icon">𝕏</div>
+          <div>
+            <div class="platform">Twitter / X</div>
+            <div class="handle">@haqtanefe</div>
+          </div>
+        </a>
+        <a class="social s-peach" href="https://instagram.com/haqtanefe" target="_blank" rel="noopener">
+          <div class="icon">📷</div>
+          <div>
+            <div class="platform">Instagram</div>
+            <div class="handle">@haqtanefe</div>
+          </div>
+        </a>
+        <a class="social s-violet" href="https://github.com/HaqtanEfe" target="_blank" rel="noopener">
+          <div class="icon">⌥</div>
+          <div>
+            <div class="platform">GitHub</div>
+            <div class="handle">@HaqtanEfe</div>
+          </div>
+        </a>
+        <a class="social s-teal" href="https://www.roblox.com/users/profile?username=HaqtanEfe" target="_blank" rel="noopener">
+          <div class="icon">🟦</div>
+          <div>
+            <div class="platform">Roblox</div>
+            <div class="handle">@HaqtanEfe / @Haktan0001</div>
+          </div>
+        </a>
+        <a class="social s-rose" href="mailto:business@haktanefe.com">
+          <div class="icon">✉</div>
+          <div>
+            <div class="platform">Email</div>
+            <div class="handle">business@haktanefe.com</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ─── Footer ─── -->
+    <footer>
+      <div>© HaqtanEfe · 2026</div>
+      <div class="links">
+        <a href="https://haktanefe.com">Home</a>
+        <a href="https://business.haktanefe.com">Business</a>
+      </div>
+    </footer>
+    <span class="footer-secret">press <kbd>/</kbd> · or try the konami code · or click the logo enough times</span>
+
+    <!-- Toast for clipboard / easter egg feedback -->
+    <div id="toast" class="toast" hidden></div>
+
+    <!-- Command palette overlay -->
+    <div class="cmd-overlay" id="cmd-overlay" aria-hidden="true">
+      <div class="cmd-box">
+        <div class="cmd-prompt">
+          <span class="arrow">›</span>
+          <input id="cmd-input" type="text" placeholder="type a command... (esc to close)" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="cmd-list" id="cmd-list"></div>
+      </div>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
