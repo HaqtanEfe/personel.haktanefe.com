@@ -8,16 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VJZ87RVH1R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VJZ87RVH1R');
-</script>
 <style>
   :root {
     --bg: #0a0a0a;
@@ -516,6 +506,13 @@
     font-size: 20px;
     background: rgba(255,255,255,0.05);
     flex-shrink: 0;
+    overflow: hidden;
+  }
+  .social .icon img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
   }
   .social .platform { font-weight: 500; font-size: 15px; line-height: 1.2; margin-bottom: 2px; }
   .social .handle   { color: var(--muted); font-size: 12px; font-family: var(--mono); }
@@ -1000,42 +997,42 @@
       </div>
       <div class="socials-grid">
         <a class="social s-rose js-discord" href="#" data-username="HaqtanEfe">
-          <div class="icon">💬</div>
+          <div class="icon"><img src="images/discord.png" alt="" onerror="this.style.display='none'"></div>
           <div>
             <div class="platform">Discord</div>
             <div class="handle">@HaqtanEfe · click to copy</div>
           </div>
         </a>
         <a class="social s-sky" href="https://x.com/haqtanefe" target="_blank" rel="noopener">
-          <div class="icon">𝕏</div>
+          <div class="icon"><img src="images/x.png" alt="" onerror="this.style.display='none'"></div>
           <div>
             <div class="platform">Twitter / X</div>
             <div class="handle">@haqtanefe</div>
           </div>
         </a>
         <a class="social s-peach" href="https://instagram.com/haqtanefe" target="_blank" rel="noopener">
-          <div class="icon">📷</div>
+          <div class="icon"><img src="images/instagram.png" alt="" onerror="this.style.display='none'"></div>
           <div>
             <div class="platform">Instagram</div>
             <div class="handle">@haqtanefe</div>
           </div>
         </a>
         <a class="social s-violet" href="https://github.com/HaqtanEfe" target="_blank" rel="noopener">
-          <div class="icon">⌥</div>
+          <div class="icon"><img src="images/github.png" alt="" onerror="this.style.display='none'"></div>
           <div>
             <div class="platform">GitHub</div>
             <div class="handle">@HaqtanEfe</div>
           </div>
         </a>
         <a class="social s-teal" href="https://www.roblox.com/users/profile?username=HaqtanEfe" target="_blank" rel="noopener">
-          <div class="icon">🟦</div>
+          <div class="icon"><img src="images/roblox.png" alt="" onerror="this.style.display='none'"></div>
           <div>
             <div class="platform">Roblox</div>
             <div class="handle">@HaqtanEfe / @Haktan0001</div>
           </div>
         </a>
         <a class="social s-rose" href="mailto:business@haktanefe.com">
-          <div class="icon">✉</div>
+          <div class="icon"><img src="images/email.png" alt="" onerror="this.style.display='none'"></div>
           <div>
             <div class="platform">Email</div>
             <div class="handle">business@haktanefe.com</div>
