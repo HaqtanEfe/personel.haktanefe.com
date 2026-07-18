@@ -298,7 +298,7 @@
     { id: 'matrix',   label: 'Matrix rain',         desc: '5 seconds of green',            hint: '🟢', run: matrixRain },
     { id: 'confetti', label: 'Confetti',            desc: 'rain a quick celebration',      hint: '🎉', run: partyTime },
     { id: 'home',     label: 'Go home',             desc: 'haktanefe.com',                 hint: '→', run: () => location.href = 'https://haktanefe.com' },
-    { id: 'business', label: 'Business side',       desc: 'go to commissions page',        hint: '→', run: () => location.href = 'https://business.haktanefe.com' },
+    { id: 'business', label: 'Business side',       desc: 'go to commissions page',        hint: '→', run: () => location.href = 'https://haqtanefe.dev' },
     { id: 'discord',  label: 'Copy Discord',        desc: 'copies @HaqtanEfe to clipboard', hint: '⎘', run: copyDiscordCmd },
     { id: 'about',    label: 'About this page',     desc: 'who made this and how',         hint: 'ℹ', run: () => showToast('hand-written HTML/CSS/JS · no framework · made by haq with a lot of coffee', { duration: 4000 }) },
     { id: 'help',     label: 'Help',                desc: 'list commands',                 hint: '?', run: () => { input.value = ''; renderList(''); } },
